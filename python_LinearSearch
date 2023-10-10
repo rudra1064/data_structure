@@ -1,0 +1,17 @@
+def search(arr,n,x):
+    for i in range (0,n):
+        if (arr[i]==x):
+             return i
+    return -1
+n=int(input("Enter the no of elements :"))
+a=[]
+print("Enter the elements")
+for i in range (n):
+    ele=int(input())
+    a.append(i)
+x=int(input("Enter the no to be serched :"))
+result=search(a,n,x)
+if(result==-1):
+    print("Element not found !")
+else :
+    print("element found !")
