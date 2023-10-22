@@ -1,0 +1,51 @@
+#include <stdio.h>
+//Bubble Sort
+void bubblesort(int*arr,int n){
+    for (int i=0;i<n;i++){
+        for(int j=0;j<n-1-i;j++){
+            if(arr[j]>arr[j+1]){
+                int temp=arr[j];
+                arr[j]=arr[j+1];
+                arr[j+1]=temp;
+            }
+        }
+    }
+}
+/*-------------------------------------------------------------*/
+//Selection Sort
+void selectionsort(int*arr,int n){
+    int indexofmin;
+    for(int i=0;i<n-1;i++){
+        indexofmin=i;
+        for(int j=i+1;j<n;j++){
+            if(arr[j]<arr[indexofmin]){
+                indexofmin=j;
+            }
+        }
+        int temp=arr[i];
+        arr[i]=arr[indexofmin];
+        arr[indexofmin]=temp;
+    }
+}
+/*--------------------------------------------------------------*/
+
+
+//printing function
+void printarray(int*arr,int n){
+    printf("\nArray :\n");
+    for(int i=0;i<n;i++){
+        printf(" %d ",arr[i]);
+    }
+}
+//main function
+int main() {
+ int arr[]={12,67,23,56,1,5};
+ int n=6;
+ printarray(arr,n);
+ bubblesort(arr,n);
+ printarray(arr,n);
+ selectionsort(arr,n);
+ printarray(arr,n);
+
+    return 0;
+}
