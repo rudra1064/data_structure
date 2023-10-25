@@ -1,0 +1,101 @@
+#include <iostream>
+using namespace std;
+//Declaring Code
+class Node{
+    public:
+    int val;
+    Node*next;
+    Node(int data){
+        val=data;
+        next=NULL;
+    }
+};
+//Adding node At Front
+   void InsertAtFront(Node*&head,int val){
+       Node*new_node=new Node(val);
+       new_node->next=head;
+       head=new_node;
+   }
+ //Adding Node at Tail
+   void InsertAtTail(Node*&head,int val){
+       Node*new_node=new Node(val);
+       Node*temp=head;
+       while(temp->next!=NULL){
+        temp=temp->next;
+       }  
+       temp->next=new_node;
+   }
+  //Ading Node At Position
+  void InsertAtPosition(Node*&head,int val,int pos){
+      Node*new_node=new Node(val);
+      Node*temp=head;
+      int current_pos=0;
+      while(current_pos!=pos-1){
+          temp=temp->next;
+          current_pos++;
+      }
+      new_node->next=temp->next;
+      temp->next=new_node;
+  }
+  //Deletion of node from head in Linked List
+  void deleteathead(Node*&head){
+      Node*temp=head;
+      head=head->next;
+      free(temp);
+  }
+  //Deletion of node at tail
+  void deleteattail(Node*&head){
+      Node*second_last=head;
+      while(second_last->next->next!=NULL){
+          second_last=second_last->next;
+      }
+     Node*temp=second_last->next;
+     second_last->next=NULL;
+     free(temp);
+  }
+  //deletion at position
+  void deletionatposition(Node*&head,int pos){
+      if(pos==0){
+          deleteathead(head);
+          return;}
+        int curr_posi=0;
+        Node*prev=head;
+        while(curr_posi!=pos-1){
+            prev=prev->next;
+            curr_posi++;
+        } 
+        Node*temp=prev->next;
+        prev->next=prev->next->next;
+        free(temp);
+        }
+  
+  
+  
+ //Traveral Of Linked List
+   void Traverse(Node*head){
+       Node*temp=head;
+       while(temp!=NULL){
+           cout<<temp->val<<"->";
+           temp=temp->next;
+       }
+       cout<<"NULL"<<endl;
+   }
+//Main Function
+int main() {
+  Node*head=NULL;
+InsertAtFront(head,2);
+Traverse(head);
+InsertAtFront(head,1);
+Traverse(head);
+InsertAtTail(head,3); 
+Traverse(head);
+InsertAtPosition(head,4,2);
+Traverse(head);
+deleteathead(head);
+Traverse(head);
+deleteattail(head);
+Traverse(head);
+deletionatposition(head ,1);
+Traverse(head);
+    return 0;
+}
