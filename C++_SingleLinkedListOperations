@@ -1,0 +1,142 @@
+#include<iostream>
+using namespace std;
+class Node{
+    public:
+    int val;
+    Node*next;
+    Node(int data){
+        val=data;
+        next=NULL;
+    }
+}
+;
+class LinkedList{
+    public:
+    Node*head;
+    LinkedList(){
+        head=NULL;
+            }
+    void insertathead(int value){
+        Node*new_node=new Node(value);
+        new_node->next=head;
+        head=new_node;
+    }    
+    void insertattail(int value){
+        Node*new_node=new Node(value);
+        Node*temp=head;
+        if(head==NULL){
+            head=new_node;
+            return;
+        }
+        while(temp->next!=NULL){
+            temp=temp->next;
+        }
+        temp->next=new_node;
+    }
+    //insert at position
+    void insertatposition(int value,int pos){
+        Node*new_node=new Node(value);
+        Node*temp=head;
+        int curr_val=0;
+        while(curr_val!=pos-1){
+            temp=temp->next;
+            curr_val++;
+        }
+        new_node->next=temp->next;
+        temp->next=new_node;
+        
+    }
+    void traverse(){
+        Node*temp=head;
+        while(temp!=NULL){
+            cout<<temp->val<<"->";
+            temp=temp->next;
+        }
+        cout<<"Null"<<endl;;
+    }
+    void deleteathead(){
+        if(head==NULL){
+            cout<<"linked list is empty";
+        }
+        Node*temp=head;
+        head=head->next;
+        free(temp);
+    }
+    void deleteattail(){
+        Node*second_last=head;
+        while(second_last->next->next!=NULL){
+            second_last=second_last->next;
+        }
+        Node*temp=second_last->next;
+        second_last->next=NULL;
+        free(temp);
+    }
+    void deleteatposition(int pos){
+       int curr_pos=0;
+        Node*temp=head;
+        while(curr_pos!=pos-1){
+            temp=temp->next;
+            curr_pos++;
+        }
+        Node*temp1=temp->next;
+        temp->next=temp->next->next;
+        free(temp1);
+    }
+    void deleteAtAlternateNodes(){
+        Node*curr_node=head;
+        while(curr_node!=NULL && curr_node->next!=NULL){
+            Node*temp=curr_node->next;
+            curr_node->next=curr_node->next->next;
+            free(temp);
+            curr_node=curr_node->next;
+        }
+    }
+    void deleteDuplicates(){
+        Node*curr_node=head;
+        while(curr_node!=NULL){
+            while(curr_node->next!=NULL && curr_node->val==curr_node->next->val){
+                Node*temp=curr_node->next;
+                curr_node->next=curr_node->next->next;
+                free (temp);
+            }
+                curr_node=curr_node->next;
+        }
+    }
+};
+int main(){
+ LinkedList l1;
+ l1.insertathead(0);
+ l1.insertattail(1);
+ l1.insertattail(2);
+ l1.insertattail(3);
+ l1.insertattail(4);
+ l1.insertattail(5);
+ l1.insertattail(5);
+ l1.insertattail(7);
+ l1.insertattail(7);
+ l1.insertattail(7);
+ l1.insertattail(8);
+ l1.insertatposition(8,11);
+ l1.traverse();
+ l1.insertattail(9);
+ l1.insertattail(9);
+ l1.insertattail(10);
+ l1.insertattail(11);
+ l1.insertattail(12);
+ l1.insertattail(12);
+ l1.insertattail(13);
+ l1.traverse();
+ l1.deleteathead();
+ l1.traverse();
+ l1.deleteattail();
+ l1.traverse();
+ l1.deleteatposition(3);
+ l1.traverse();
+ l1.deleteAtAlternateNodes();   
+ l1.traverse();
+ l1.deleteDuplicates();  
+ l1.traverse();
+    
+    
+    return 0;
+}
