@@ -1,0 +1,97 @@
+#include <iostream>
+using namespace std;
+class Node{
+    public:
+    int val;
+    Node*next;
+    Node(int data){
+        val=data;
+        next=NULL;
+    }
+};
+class CircularLinkedList{
+    public:
+    Node*head;
+    CircularLinkedList(){
+        head=NULL;
+    }
+void insertatfront(int val){
+    Node*new_node=new Node(val);
+    if (head==NULL){
+        head=new_node;
+        new_node->next=head;
+        return;
+    }
+    Node*temp=head;
+    while(temp->next!=head){
+        temp=temp->next;
+    }
+    temp->next=new_node;
+    new_node->next=head;
+    head=new_node;
+}
+void insertatend(int val){
+    Node*new_node=new Node(val);
+    if(head==NULL){
+        head=new_node;
+        new_node->next=head;
+    }
+    Node*temp=head;
+    while(temp->next!=head){
+        temp=temp->next;
+    }
+    temp->next=new_node;
+    new_node->next=head;
+}
+void insertatposition(int val,int pos){
+    Node*new_node=new Node(val);
+    Node*temp=head;
+    int cont=1;
+    while(cont!=pos-1){
+        temp=temp->next;
+    }
+    new_node->next=temp->next;
+    temp->next=new_node;
+}
+void deletionathead(){
+    Node*temp=head;
+    Node*temp1=head;
+    while(temp1->next!=head){
+        temp1=temp1->next;
+    }
+    head=head->next;
+    temp1->next=head;
+    free(temp);
+}
+void deletionatend(){
+    Node*tail=head;
+    while(tail->next->next!=head){
+        tail=tail->next;
+    }
+    Node*temp=tail->next;
+    tail->next=head;
+    free(temp);
+}
+void traverse(){
+    Node*temp=head;
+   do{
+    cout<<temp->val<<"->";
+     temp=temp->next;}
+     while(temp!=head);
+    cout<<"Null";
+}
+};
+
+int main() {
+CircularLinkedList l1;
+l1.insertatfront(1);
+l1.insertatfront(2);
+l1.insertatend(3);
+l1.insertatposition(4,2);
+l1.deletionathead();
+l1.deletionatend();
+l1.traverse();
+    
+
+    return 0;
+}
