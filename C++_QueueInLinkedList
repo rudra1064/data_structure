@@ -1,0 +1,80 @@
+#include <iostream>
+using namespace std;
+//Queue
+class node{
+    public:
+    int data;
+    node*next;
+    node(int val){
+        data=val;
+        next=NULL;
+    }
+};
+class queue{
+    node*head;
+    node*tail;
+    public:
+    queue(){
+        head=NULL;
+        tail=NULL;
+    }
+//To Add
+    void enqueue(int x){
+        node*n=new node(x);
+        if(head==NULL){
+            tail=n;
+            head=n;
+            return;
+        }
+        tail->next=n;
+        tail=n;
+    }
+//To pull out
+    void dequeue(){
+        if (head==NULL){
+            cout<<"Queue underflow";
+            return;
+        }
+        node*todelete=head;
+        head=head->next;
+        delete todelete;
+    }
+//display
+    void peek(){
+        if (head==NULL){
+            cout<<"NO element in queue";
+            return;
+        }
+        node*temp=head;
+        while(temp->next!=NULL){
+            cout<<temp->data<<"->";
+            temp=temp->next;
+        }
+        cout<<"NULL";
+    }
+//checking
+    bool isempty(){
+        if(head==NULL){
+            return true;
+        }
+        return false;
+    }
+};
+ 
+int main() {
+    queue q;
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    q.enqueue(4);
+    q.peek();
+    cout<<endl;
+    q.dequeue();
+    q.peek();
+    cout<<endl;
+    cout<<q.isempty();  //0=Not Empty
+                        //1=Empty
+    
+
+    return 0;
+}
